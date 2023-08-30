@@ -9,7 +9,6 @@
 <h1>タスク管理アプリケーション</h1>
 <div class="task_form">
     <h2>タスクの登録</h2>
-div
     <div class="task_from">
         <h2>タスクの登録</h2>
 
@@ -39,7 +38,7 @@ div
                    <td class="hidden" th:task="${task.id}"></td>
                    <td th:text="${task.task}"></td>
                    <td width="100px" th:text="${task.deadline}">
-                   <td width="50px" th:text=-"${task.done} ? '完了': '未完了'"</td>
+                   <td width="50px" th:text="${task.done} ? '完了': '未完了'"</td>
                    <td width="50px">
                        <button type="submit" id="update_button" onclick="
                        let row = this.parentElement.parentElement;
@@ -57,12 +56,13 @@ div
                            <button type="submit" id="delete_button">削除</button>
                            <input type="hidden" name="id" th:value="${task.id}" />
                        </form>
-                   </td>
-               </tr>
+                       </td>
+                   </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 
 <div id="updateDialog">
     <div class="task_form">
