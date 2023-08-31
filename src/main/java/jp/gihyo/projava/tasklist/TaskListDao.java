@@ -15,7 +15,6 @@ import java.util.Map;
 @Service
 public class TaskListDao {
     private final JdbcTemplate jdbcTemplate;
-
     @Autowired
     TaskListDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -29,7 +28,6 @@ public class TaskListDao {
 
     public List<TaskItem> findAll() {
         String query = "SELECT * FROM tasklist";
-
         List<Map<String, Object>> resurt = jdbcTemplate.queryForList(query);
         List<TaskItem> taskItems = resurt.stream()
                 .map((Map<String, Object> row) -> new TaskItem(
@@ -40,4 +38,17 @@ public class TaskListDao {
                 .toList();
         return taskItems;
     }
+
+    public int update(TaskItem taskItem) {
+        int number = jdbcTemplate.update(
+                "UPDATE tasklist SET task = ?, deadline = ?, done = ? WHERE id = ?",
+                taskItem.task(),
+                taskItem.deadline(),
+                taskItem.done(),
+                taskItem.id());
+        return number; }
+
+    public int delete(String id) {
+        int number = jdbcTemplate.update("DELETE FROM tasklist WHERE id = ?", id);
+        return number; }
 }
