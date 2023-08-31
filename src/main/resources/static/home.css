@@ -28,7 +28,7 @@ input {
 
 /*タスク一覧*/
 .tasklist table {
-    width: 100px;
+    width: 100%;
     border: 1px solid;
     border-collapse: collapse;
 }
