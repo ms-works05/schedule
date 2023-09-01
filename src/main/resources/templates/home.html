@@ -51,8 +51,8 @@
                 <td th:text="${task.task}"></td>
                 <td th:text="${task.memo}"></td>
                 <td width="100px" th:text="${task.deadline}"></td>
-                <td width="50px" th:text="${task.done} ? '完了': '未完了'"></td>
-                <td width="50px">
+                <td width="50px" th:text="${task.done} ? '完了': '未完了'" class="tbtn"></td>
+                <td width="50px" class="tbtn">
                     <button type="submit" id="update_button" onclick="
                     let row = this.parentElement.parentElement;
                     getElementById('update_id').value=row.cells[0].firstChild.data;
@@ -65,7 +65,7 @@
                     dialog.style.display ='block';
                     ">更新</button>
                 </td>
-                <td width="50px">
+                <td width="50px" class="tbtn">
                     <form action="/delete">
                         <button type="submit" id="delete_button">削除</button>
                         <input type="hidden" name="id" th:value="${task.id}" />

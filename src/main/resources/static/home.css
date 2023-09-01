@@ -1,6 +1,25 @@
 body {
     margin: 30px;
     color: #283655;
+    background-color: #cbcfd8;
+    }
+
+h1 {
+    color: #ebedf0;
+    line-height:0.95em;
+    font-weight:bold;
+    color: #fffff0;
+    text-shadow:
+    0 0.05em 0.08em rgba(0,0,0,0.7);
+    }
+
+h2 {
+    color: #ebedf0;
+    line-height:0.95em;
+    font-weight:bold;
+    color: #fffff0;
+    text-shadow:
+    0 0.05em 0.08em rgba(0,0,0,0.7);
     }
 
 input {
@@ -13,8 +32,14 @@ input {
 
 /*タスク入力フォーム*/
 .task_form {
-    padding: 0px 10px 10px 10px;
+    padding: 0px 15px 15px 15px;
     border: 1px solid #4D648D;
+    background-color: #9cacd8;
+    opacity: 0.7;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .task_form form {
@@ -26,11 +51,21 @@ input {
     width: 150px;
 }
 
+.tbtn {
+    text-align: center;
+    }
+
 /*タスク一覧*/
 .tasklist table {
     width: 100%;
+    padding: 5px 5px 5px 5px;
     border: 1px solid;
     border-collapse: collapse;
+    background-color: #b8c0d6;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 /*タスク更新ダイアログ（第18の章のサンプルで使用）*/
