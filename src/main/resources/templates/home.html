@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>タスク管理アプリケーション</title>
-    <link th:href="@{/home.css}" rel="stylesheet">
+      <link th:href="@{/home.css}" rel="stylesheet">
   </head>
   <body>
     <h1>タスク管理アプリケーション</h1>
@@ -24,13 +24,12 @@
             <thead>
               <tr>
                 <th class="hidden">ID</th>
-                <th>タ        スク</th>
+                <th>タスク</th>
                 <th width="150px">期限</th>
                 <th width="100px">状態</th>
                 <th></th>
               </tr>
             </thead>
-<!--ｋｋｋｋ-->
 
             <tbody>
             <tr th:each="task : ${tasklist}">
@@ -39,13 +38,20 @@
                 <td width="100px" th:text="${task.deadline}"></td>
                 <td width="50px" th:text="${task.done} ? '完了': '未完了'"></td>
                 <td width="50px">
-                    <button type="submit" id="update_button"
-                            onclick="copyToDialog(this.parentElement.parentElement);"
-                            style="text-align:center";>更新</button>
+                    <button type="submit" id="update_button" onclick="
+                    let row = this.parentElement.parentElement;
+                    getElementById('update_id').value=row.cells[0].firstChild.data;
+                    getElementById('update_task').value=row.cells[1].firstChild.data;
+                    getElementById('update_deadline').value=row.cells[2].firstChild.data;
+                    getElementById('update_status').selectedIndex=(row.cells[3].firstChild.data=='完了')?1:0;
+                    var dialog = getElementById('updateDialog');
+                    dialog.style.left = ((window.innerWidth - 500) / 2) + 'px';
+                    dialog.style.display ='block';
+                    ">更新</button>
                 </td>
                 <td width="50px">
                     <form action="/delete">
-                        <button type="submit" id="delete_button" style="text-align:center">削除</button>
+                        <button type="submit" id="delete_button">削除</button>
                         <input type="hidden" name="id" th:value="${task.id}" />
                     </form>
                 </td>
@@ -59,7 +65,7 @@
         <div class="task_form">
             <h2>タスクの更新</h2>
             <form action="/update">
-                <input id="update" name="id" type="hidden" />
+                <input id="update_id" name="id" type="hidden" />
                 <label>タスク</label>
                 <input id ="update_task" name="task" type="text" />
                 <label>期限</label>
