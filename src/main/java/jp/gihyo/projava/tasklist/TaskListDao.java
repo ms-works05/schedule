@@ -33,6 +33,7 @@ public class TaskListDao {
                 .map((Map<String, Object> row) -> new TaskItem(
                         row.get("id").toString(),
                         row.get("task").toString(),
+                        row.get("memo").toString(),
                         row.get("deadline").toString(),
                         (Boolean) row.get("done")))
                 .toList();
@@ -41,8 +42,9 @@ public class TaskListDao {
 
     public int update(TaskItem taskItem) {
         int number = jdbcTemplate.update(
-                "UPDATE tasklist SET task = ?, deadline = ?, done = ? WHERE id = ?",
+                "UPDATE tasklist SET task = ?, memo = ?, deadline = ?, done = ? WHERE id = ?",
                 taskItem.task(),
+                taskItem.memo(),
                 taskItem.deadline(),
                 taskItem.done(),
                 taskItem.id());
