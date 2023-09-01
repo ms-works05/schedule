@@ -68,6 +68,7 @@ public class TaskListDao {
                 .map((Map<String, Object> row) -> new TaskItem(
                         row.get("id").toString(),
                         row.get("task").toString(),
+                        row.get("memo").toString(),
                         row.get("deadline").toString(),
                         (Boolean) row.get("done")))
                 .toList();
