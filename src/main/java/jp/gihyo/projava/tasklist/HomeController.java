@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Controller
 public class HomeController {
-    record  TaskItem(String id, String task, String deadline, boolean done) {}
+    record  TaskItem(String id, String task, String memo,String deadline, boolean done) {}
     private List<TaskItem> taskItems = new ArrayList<>();
     private final TaskListDao dao;
     @Autowired
@@ -28,9 +28,10 @@ public class HomeController {
     }
     @GetMapping("/add")
     String addItem(@RequestParam("task")String task,
+                   @RequestParam("memo")String memo,
                    @RequestParam("deadline") String deadline) {
         String id = UUID.randomUUID().toString().substring(0,8);
-        TaskItem item = new TaskItem(id, task, deadline, false);
+        TaskItem item = new TaskItem(id, task, memo, deadline, false);
         dao.add(item);
         return "redirect:/list";
     }
@@ -49,9 +50,10 @@ public class HomeController {
     @GetMapping("/update")
     String updateItem(@RequestParam("id") String id,
                       @RequestParam("task") String task,
+                      @RequestParam("memo") String memo,
                       @RequestParam("deadline") String deadline,
                       @RequestParam("done") boolean done) {
-        TaskItem taskItem = new TaskItem(id, task, deadline, done);
+        TaskItem taskItem = new TaskItem(id, task, memo, deadline, done);
         dao.update(taskItem);
         return "redirect:/list";
     }
