@@ -34,7 +34,7 @@ public class TaskListDao {
                         row.get("id").toString(),
                         row.get("task").toString(),
                         row.get("deadline").toString(),
-                        (Boolean)row.get("done")))
+                        (Boolean) row.get("done")))
                 .toList();
         return taskItems;
     }
@@ -46,9 +46,29 @@ public class TaskListDao {
                 taskItem.deadline(),
                 taskItem.done(),
                 taskItem.id());
-        return number; }
+        return number;
+    }
 
     public int delete(String id) {
         int number = jdbcTemplate.update("DELETE FROM tasklist WHERE id = ?", id);
-        return number; }
+        return number;
+    }
+
+    public List<TaskItem>search(String month, String chk1) {
+        String query;
+        if (chk1.equals("0")) {
+            query = "SELECT * FROM tasklist where deadline like '" + month + "%' and done=false ";
+        } else {
+            query = "SELECT * FROM tasklist where deadline like '" + month + "%'";
+        }
+        List<Map<String, Object>> resurt = jdbcTemplate.queryForList(query);
+        List<TaskItem> taskItems = resurt.stream()
+                .map((Map<String, Object> row) -> new TaskItem(
+                        row.get("id").toString(),
+                        row.get("task").toString(),
+                        row.get("deadline").toString(),
+                        (Boolean) row.get("done")))
+                .toList();
+        return taskItems;
+    }
 }

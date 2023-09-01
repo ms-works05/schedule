@@ -55,4 +55,12 @@ public class HomeController {
         dao.update(taskItem);
         return "redirect:/list";
     }
+    @GetMapping("/search")
+    String search(Model model,
+                  @RequestParam(name = "month") String month,
+                  @RequestParam(name = "chk1", required = false, defaultValue = "1" ) String chk1) {
+        List<TaskItem> taskItems = dao.search(month,chk1);
+        model.addAttribute("tasklist", taskItems);
+        return "home";
+    }
 }
